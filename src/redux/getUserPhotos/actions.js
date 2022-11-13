@@ -1,11 +1,11 @@
 import { CLIENT_ID } from '../../config'
-import { USER_URL } from '../../constants'
+import { PER_PAGE, USER_URL } from '../../constants'
 
 const getUserPhotos = (username, page = 1) => async ( dispatch) => {
   const queryParams = {
     client_id: CLIENT_ID,
     page: page,
-    per_page: 12
+    per_page: PER_PAGE
   }
 
   dispatch({ type: 'FETCH_USER_PHOTOS_START' })

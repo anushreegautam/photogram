@@ -9,10 +9,15 @@ a {
   color: black;
   font-weight: 600;
   font-family: sans-serif;
+  width: fit-content;
 }
 
 img {
   width: 100%;
+}
+
+hr {
+  margin: 0;
 }
 
 .main-container {
@@ -77,6 +82,11 @@ img {
 
 .card {
   margin-bottom: 10px;
+}
+
+.card-photo {
+  max-height: 80vh;
+  max-width: 100%;
 }
 
 .card-container {
@@ -172,6 +182,15 @@ img {
   margin: 0px;
 }
 
+.user-profile-links {
+  display: grid;
+  padding: 0 15px 5px;
+}
+
+.user-profile-links a:hover {
+  text-decoration: underline;
+}
+
 .photo-view-navbar {
   display: flex;
   width: 100%;
@@ -188,7 +207,7 @@ img {
 }
 
 .nav-items img:focus {
-    border-bottom: 1px solid black;
+  border-bottom: 1px solid black;
 }
 
 .grid-view {
@@ -207,6 +226,12 @@ img {
 
 /* tablets and under */ 
 @media (max-width: 860px) {
+
+  .card-photo {
+    max-height: 50vh;
+    max-width: 100%;
+  }
+
   .list-view {
     max-width: inherit;
     min-width: inherit;
@@ -266,6 +291,15 @@ img {
 
 /* Mobile */ 
 @media (max-width: 500px) {
+  .card {
+    border-radius: 0px;
+  }
+
+  .card-photo {
+  max-height: 50vh;
+  max-width: 100%;
+ }
+
   .username {
     display: flex;
     flex-direction: row;

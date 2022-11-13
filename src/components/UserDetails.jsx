@@ -1,6 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
+import { faCircleUser, faMapPin } from '@fortawesome/free-solid-svg-icons'
+import { faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons'
 
 const UserDetails = ({ user }) => (
   <>
@@ -24,6 +25,11 @@ const UserDetails = ({ user }) => (
      <div className="user-details">
       <h3>{user?.name}</h3>
       <span className="plain-text">{user?.bio}</span>
+     </div>
+     <div className="user-profile-links">
+     {user?.location && <span className="plain-text" ><FontAwesomeIcon icon={faMapPin} className="fa-sm" /> {`${user?.location}`}</span>}
+     {user?.social?.instagram_username && <a href={`https://www.instagram.com/${user?.social?.instagram_username}/`} className="plain-text"><FontAwesomeIcon icon={faInstagram} className="fa-sm" />  {`${user?.social?.instagram_username}`}</a>}
+     {user?.social?.twitter_username && <a href={`https://twitter.com/${user?.social?.twitter_username}`} className="plain-text"><FontAwesomeIcon icon={faTwitter} className="fa-sm" />  {`${user?.social?.twitter_username}`}</a>}
      </div>
   </>  
 )

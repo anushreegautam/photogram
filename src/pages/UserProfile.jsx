@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { Spinner } from 'react-bootstrap'
@@ -12,6 +12,7 @@ import GridView from '../components/GridView'
 import getUserInfo from '../redux/getUserInfo/actions'
 import getUserPhotos from '../redux/getUserPhotos/actions'
 import ListView from '../components/ListView'
+import useLastElementRef from '../hooks/useLastElementRef'
 
 const UserProfile = () => {
   const { username } = useParams()  
@@ -19,27 +20,11 @@ const UserProfile = () => {
   const [showGrid, setShowGrid] = useState(true)  
   const [isLoading, setIsLoading] = useState(false) 
   const [currentPage, setCurrentPage] = useState(1)  
-  const { data: userInfo, error: userInfoError } = useSelector(state => state.userInfo)
+  const { data: userInfo, error: userInfoError} = useSelector(state => state.userInfo)
   const { isLoading: isUserPhotosLoading, data: userPhotos, error: userPhotosError} = useSelector(state => state.userPhotos)  
-  const [selectedPhoto, setSelectedPhoto] = useState(null)
 
-  const handleGridView = () => setShowGrid(true)
-  const handleListView = () => setShowGrid(false)
-
-  const observer = useRef()
-  const lastPhotoRef = useCallback(
-    (node) => {
-      if (isUserPhotosLoading) return;
-      if (observer.current) observer.current.disconnect()
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && userInfo?.total_photos > 12*currentPage) {
-          setCurrentPage(page => page + 1)
-        }
-      })
-      if (node) observer.current.observe(node)
-     },
-    [isUserPhotosLoading]
-  )
+  const { lastElementRef: girdLastElementRef} = useLastElementRef(isLoading, isUserPhotosLoading, userInfo?.total_photos, currentPage, setCurrentPage)
+  const { lastElementRef: listLastElementRef} = useLastElementRef(isLoading, isUserPhotosLoading, userInfo?.total_photos, currentPage, setCurrentPage)
 
   const fetchPhotos = useCallback(() => {
     dispatch(getUserPhotos( username, currentPage))
@@ -51,22 +36,21 @@ const UserProfile = () => {
 
   useEffect(() => {
     setIsLoading(true)
-    dispatch(getUserInfo(username))
-    setIsLoading(false)
+    dispatch(getUserInfo(username)).then(() => setIsLoading(false))  
   }, [])
 
   return (
-    <Layout isProfilePage username={username} error={userInfoError || userPhotosError} >  
+    <Layout isProfilePage username={username} error={userInfoError || userPhotosError} >
      {!isLoading && (
         <>
           <UserDetails user={userInfo} />
           <div className="photo-view-navbar">
-            <div className="nav-items" onClick={handleGridView}><FontAwesomeIcon icon={faGrip} /></div>
-            <div className="nav-items" onClick={handleListView}><FontAwesomeIcon icon={faList} /></div>
+            <div className="nav-items" onClick={() => setShowGrid(true)}><FontAwesomeIcon icon={faGrip} /></div>
+            <div className="nav-items" onClick={() => setShowGrid(false)}><FontAwesomeIcon icon={faList} /></div>
           </div>
-          { !!userPhotos?.length ? ( showGrid ?
-             <GridView photos={userPhotos} lastPhotoRef={lastPhotoRef} setSelectedPhoto={setSelectedPhoto} setShowGrid={setShowGrid} />
-             : <ListView photos={userPhotos} selectedPhoto={selectedPhoto} lastPhotoRef={lastPhotoRef} />
+          { !!userPhotos?.length && !userInfoError ? ( showGrid ?
+             <GridView photos={userPhotos} lastPhotoRef={girdLastElementRef} />
+             : <ListView photos={userPhotos} lastPhotoRef={listLastElementRef} />
              )
             : <EmptyView /> }
         </>
