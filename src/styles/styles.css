@@ -1,0 +1,283 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;  
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  font-family: sans-serif;
+}
+
+img {
+  width: 100%;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  margin: auto;
+  height: 100vh;
+}
+
+.loader-style {
+   width: 100%;
+   position: relative;
+   top: 100px;
+   height: 100%;
+   margin: auto;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+}
+
+.toast-msg {
+  background-color: black;
+  color: white;
+  line-height: 1rem;  
+  overflow: visible;
+  z-index: 11111;
+  padding: 0 10px;
+  position: fixed;
+  top: 60%;
+  left: 43%;
+  width: fit-content;
+}
+
+.toast-msg div {
+  margin: auto;
+  inline-size: fit-content;
+}
+
+.app-header {
+  padding: 20px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 1px solid #ddd4d4;
+  font-weight: bold;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.empty-view {
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  width: 100%;
+  padding: 20vh 0;
+  align-items: center;
+  color: #918d8d;
+  font-weight: 500;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; 
+}
+
+.card {
+  margin-bottom: 10px;
+}
+
+.card-container {
+  display: flex;
+  width: 100%; 
+  padding: 10px;
+  align-items: center;
+  gap: 15px;
+} 
+
+.likes h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  padding-top: 6px;
+}
+
+.footer {
+  padding: 0px 10px 10px;
+  align-items: flex-start;
+}
+
+.name-location {
+  display: flex;
+  height: 100%;  
+  flex-direction: column;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.plain-text {
+  font-family: sans-serif;
+  align-self: center;
+}
+
+.username {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; 
+}
+
+.username a {
+  display: none;
+}
+
+.profile-photo {
+  width: 50px;
+  height: 50px;   
+}
+
+.profile-photo img {
+  border-radius: 50%;  
+}
+
+.info {
+  padding: inherit;
+  width: 150px;
+  height: 150px;   
+}
+
+.user-icon {
+  color: #918d8d; 
+}
+
+.user-info {
+  display: flex;
+  width: 100%;
+  padding: 20px 0px;
+  justify-content: space-around;
+}
+
+.follow-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  }
+
+.data-counts {
+  font-weight: 600;
+  font-size: 1.5rem;
+  font-family: Arial, Helvetica, sans-serif;
+} 
+
+.user-details {
+  padding: 20px;
+}
+
+.user-details h3 {
+  font-family: emoji;
+  margin: 0px;
+}
+
+.photo-view-navbar {
+  display: flex;
+  width: 100%;
+}
+
+.nav-items {
+  padding: 20px;
+  width: 50%;
+  display: flex;
+  align-items: center;  
+  justify-content: center;
+  color: #767171;
+  border: 1px solid #ddd4d4;
+}
+
+.nav-items img:focus {
+    border-bottom: 1px solid black;
+}
+
+.grid-view {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 5px;
+  align-items: center;
+}
+
+.list-view {
+  max-width: 600px;
+  min-width: 600px;
+  margin: auto;
+  padding-top: 10px;
+}  
+
+/* tablets and under */ 
+@media (max-width: 860px) {
+  .list-view {
+    max-width: inherit;
+    min-width: inherit;
+  }
+
+  .main-container {
+    max-width: inherit;
+  }
+
+  .app-header {
+    padding: 15px;
+  }
+
+  .user-details h3 {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .nav-items {
+    padding: 10px;
+  }
+
+  .plain-text {
+    font-size: 0.8rem;
+  }
+
+  .data-counts {
+    font-size: 1rem;
+  }
+
+  .profile-photo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .info {
+    width: 100px;
+    height: 100px;   
+  }
+
+  a {
+    font-size: 0.8rem;
+  }
+
+  .likes {
+    padding: 5px;
+  }
+
+  .likes h3 {
+    font-size: 0.9rem;
+  }
+
+  .toast-msg {
+    left: 34%;
+  }
+}
+
+/* Mobile */ 
+@media (max-width: 500px) {
+  .username {
+    display: flex;
+    flex-direction: row;
+    gap: 20px
+  }
+    
+  .username a {
+    display: contents;
+  }
+
+  .toast-msg {
+    top: 50%;
+    left: 25%;
+  }
+}
