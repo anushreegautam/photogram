@@ -6,11 +6,6 @@ import Layout from '../components/Layout'
 import EmptyView from '../components/EmptyView'
 import getRandomPhotos from '../redux/getRandomPhotos/actions'
 import ListView from '../components/ListView'
-import { createContext } from 'react'
-
-const usersFeedState = createContext({
-
-})
 
 const NewsFeed = () => {
   const dispatch =  useDispatch()  
@@ -22,7 +17,6 @@ const NewsFeed = () => {
       if (isLoading) return;
       if (observer.current) observer.current.disconnect()
       observer.current = new IntersectionObserver((entries) => {
-        console.log('userFeed entries ', entries)
         if (entries[0].isIntersecting) {
           dispatch(getRandomPhotos())
         }
@@ -40,7 +34,7 @@ const NewsFeed = () => {
     <Layout error={error} >  
       { !isLoading ? (
         !!photos?.length ?
-        <ListView photos={photos} lastRef={lastPhotoElementRef} />
+        <ListView photos={photos} lastPhotoRef={lastPhotoElementRef} />
          : <EmptyView /> )
          : 
           <div className="loader-style" >

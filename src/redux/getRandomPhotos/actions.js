@@ -1,10 +1,10 @@
-import { RANDOM_PHOTOS_URL } from '../../constants'
+import { PER_PAGE, RANDOM_PHOTOS_URL } from '../../constants'
 import { CLIENT_ID } from '../../config'
 
 const getRandomPhotos = () => async (dispatch) => {
   const params = {
     client_id: CLIENT_ID ,
-    count: 10
+    count: PER_PAGE
   }
 
   dispatch({ type: 'FETCH_RANDOM_PHOTOS_START' })
